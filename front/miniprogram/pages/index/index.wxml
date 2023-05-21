@@ -1,0 +1,88 @@
+<view>
+  <!-- 搜索框 start -->
+  <SearchBar></SearchBar>
+  <!-- 搜索框 end -->
+
+  <!-- 轮播图 开始 -->
+  <view class="index_swiper">
+    <!-- 
+      1 swiper标签存在默认的宽度和高度
+        100% * 150px 
+      2 image标签也存在默认的宽度和高度
+        320px * 240px 
+      3 设计图片和轮播图
+        1 先看一下原图的宽高  600 * 300
+        2 让图片的高度自适应 宽度 等于100%
+        3 让swiper标签的高度 变成和图片的高一样即可 
+      4 图片标签
+        mode属性 渲染模式
+          widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化 
+     -->
+    <swiper autoplay indicator-dots circular>
+      <swiper-item
+      wx:for="{{swiperList}}"
+      wx:for-item="swiper"
+      wx:key="id"
+
+      >
+        <navigator url="/pages/product_detail/index?id={{swiper.id}}">
+          <image mode="widthFix" src="{{baseUrl+'image/swiper/'+swiper.swiperPic}}"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 轮播图 结束 -->
+  
+  <!-- 商品大类分类 开始 -->
+  <view class="index_bigType">
+        <view class="bigTypeRow">
+          <navigator
+          bindtap="handleTypeJump"
+          data-index="{{index}}"
+          wx:for="{{bigTypeList_row1}}"
+          wx:for-item="bigType"
+          wx:for-index="index"
+          wx:key="id">
+            <image mode="widthFix" src="{{baseUrl+'image/bigType/'+bigType.image}}"></image>
+            <view class= "name">{{bigType.name}}</view>
+          </navigator>
+        </view>
+        <view class="bigTypeRow">
+          <navigator
+          bindtap="handleTypeJump"
+          data-index="{{index+4}}"
+          wx:for="{{bigTypeList_row2}}"
+          wx:for-item="bigType"
+          wx:for-index="index"
+          wx:key="id">
+            <image mode="widthFix" src="{{baseUrl+'image/bigType/'+bigType.image}}"></image>
+            <view class= "name">{{bigType.name}}</view>
+          </navigator>
+        </view>
+     
+  </view>
+  <!-- 商品大类分类 结束 -->
+
+  <!-- 商品热卖推荐 开始 -->
+  <view class="index_hot_product">
+    <view class="product_title">
+     热卖推荐
+    </view>
+    <view class="list">
+      <view class="product_detail" 
+          wx:for="{{hotProductList}}"
+          wx:for-item="hotProduct"
+          wx:for-index="index"
+          wx:key="id"
+      >
+        <navigator url="/pages/product_detail/index?id={{hotProduct.id}}">
+          <image mode="widthFix" src="{{baseUrl+'image/product/'+hotProduct.proPic}}"></image>
+          <view class="product_name">{{hotProduct.name}}</view>
+          <view class="product_price"> ¥ {{hotProduct.price}}</view>
+          <button size="mini" type="warn">立即购买</button>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <!-- 商品热卖推荐 结束 -->
+</view>
